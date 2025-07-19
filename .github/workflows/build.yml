@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3']
     steps:
     - name: checkout code
       uses: actions/checkout@v4
@@ -26,12 +29,17 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+    - name: Copy root certificate
+      run: echo "${{ secrets.ROOT_CRT }}" > ./root_ca.crt
+
     - name: Build & Publish Docker Image
       uses: docker/build-push-action@v6
       with:
         push: true
         platforms: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8
-        tags: akeb/docker-debian12:latest, akeb/docker-debian12:${{github.ref_name}}
+        tags: akeb/php-fpm-${{ matrix.version }}:latest, akeb/php-fpm-${{ matrix.version }}:${{github.ref_name}}
         context: ./
         cache-from: type=gha
         cache-to: type=gha,mode=max
+        build-args: |
+          PHP_VERSION=${{ matrix.version }}
