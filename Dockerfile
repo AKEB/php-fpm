@@ -1,4 +1,4 @@
-FROM akeb/docker-debian12:v1.0.0
+FROM akeb/docker-debian12:latest
 
 ARG PHP_VERSION="8.3"
 ENV PHP_VERSION=${PHP_VERSION}
