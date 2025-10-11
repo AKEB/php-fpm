@@ -35,6 +35,7 @@ COPY php-fpm.conf /etc/php/${PHP_VERSION}/fpm/php-fpm.conf
 COPY 00-env.ini /etc/php/${PHP_VERSION}/fpm/conf.d/00-env.ini
 COPY 00-env.ini /etc/php/${PHP_VERSION}/cli/conf.d/00-env.ini
 COPY root_ca.crt /usr/local/share/ca-certificates/
+COPY logrotate/php${PHP_VERSION}-fpm /etc/logrotate.d/
 RUN update-ca-certificates -v
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
