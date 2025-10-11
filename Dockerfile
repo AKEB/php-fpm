@@ -40,7 +40,7 @@ RUN update-ca-certificates -v
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-CMD ["/bin/bash", "-c", "/run_on_start.sh;php-fpm${PHP_VERSION} -F"]
+CMD ["/bin/bash", "-c", "cron;/run_on_start.sh;php-fpm${PHP_VERSION} -F"]
 
 EXPOSE 9000
 

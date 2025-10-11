@@ -1,20 +1,8 @@
-/var/log/php8.1-fpm.log {
-        rotate 12
-        weekly
-        missingok
-        notifempty
-        compress
-        delaycompress
-        postrotate
-                if [ -x /usr/lib/php/php8.1-fpm-reopenlogs ]; then
-                        /usr/lib/php/php8.1-fpm-reopenlogs;
-                fi
-        endscript
-}
-
-/var/log/php/*.log {
-        rotate 12
-        weekly
+/var/log/php7.1-fpm.log
+/var/log/php/*.log
+{
+        rotate 7
+        daily
         missingok
         notifempty
         compress
