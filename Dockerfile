@@ -43,4 +43,3 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 CMD ["/bin/bash", "-c", "cron;/run_on_start.sh;php-fpm${PHP_VERSION} -F"]
 
 EXPOSE 9000
-
