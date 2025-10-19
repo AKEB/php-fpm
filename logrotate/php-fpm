@@ -1,42 +1,44 @@
 /var/log/php*.log
 /var/log/php/*.log
 {
-        rotate 7
-        daily
-        missingok
-        notifempty
-        compress
-        delaycompress
-        postrotate
-                if [ -x /usr/lib/php/php7.1-fpm-reopenlogs ]; then
-                        /usr/lib/php/php7.1-fpm-reopenlogs;
-                fi
-                if [ -x /usr/lib/php/php7.2-fpm-reopenlogs ]; then
-                        /usr/lib/php/php7.2-fpm-reopenlogs;
-                fi
-                if [ -x /usr/lib/php/php7.3-fpm-reopenlogs ]; then
-                        /usr/lib/php/php7.3-fpm-reopenlogs;
-                fi
-                if [ -x /usr/lib/php/php7.4-fpm-reopenlogs ]; then
-                        /usr/lib/php/php7.4-fpm-reopenlogs;
-                fi
-                if [ -x /usr/lib/php/php8.0-fpm-reopenlogs ]; then
-                        /usr/lib/php/php8.0-fpm-reopenlogs;
-                fi
-                if [ -x /usr/lib/php/php8.1-fpm-reopenlogs ]; then
-                        /usr/lib/php/php8.1-fpm-reopenlogs;
-                fi
-                if [ -x /usr/lib/php/php8.2-fpm-reopenlogs ]; then
-                        /usr/lib/php/php8.2-fpm-reopenlogs;
-                fi
-                if [ -x /usr/lib/php/php8.3-fpm-reopenlogs ]; then
-                        /usr/lib/php/php8.3-fpm-reopenlogs;
-                fi
-                if [ -x /usr/lib/php/php8.4-fpm-reopenlogs ]; then
-                        /usr/lib/php/php8.4-fpm-reopenlogs;
-                fi
-                if [ -x /usr/lib/php/php8.5-fpm-reopenlogs ]; then
-                        /usr/lib/php/php8.5-fpm-reopenlogs;
-                fi
-        endscript
+  su www-data www-data
+  rotate 7
+  daily
+  missingok
+  notifempty
+  compress
+  delaycompress
+  create 0640 www-data www-data
+  postrotate
+    if [ -x /usr/lib/php/php7.1-fpm-reopenlogs ]; then
+      /usr/lib/php/php7.1-fpm-reopenlogs;
+    fi
+    if [ -x /usr/lib/php/php7.2-fpm-reopenlogs ]; then
+      /usr/lib/php/php7.2-fpm-reopenlogs;
+    fi
+    if [ -x /usr/lib/php/php7.3-fpm-reopenlogs ]; then
+      /usr/lib/php/php7.3-fpm-reopenlogs;
+    fi
+    if [ -x /usr/lib/php/php7.4-fpm-reopenlogs ]; then
+      /usr/lib/php/php7.4-fpm-reopenlogs;
+    fi
+    if [ -x /usr/lib/php/php8.0-fpm-reopenlogs ]; then
+      /usr/lib/php/php8.0-fpm-reopenlogs;
+    fi
+    if [ -x /usr/lib/php/php8.1-fpm-reopenlogs ]; then
+      /usr/lib/php/php8.1-fpm-reopenlogs;
+    fi
+    if [ -x /usr/lib/php/php8.2-fpm-reopenlogs ]; then
+      /usr/lib/php/php8.2-fpm-reopenlogs;
+    fi
+    if [ -x /usr/lib/php/php8.3-fpm-reopenlogs ]; then
+      /usr/lib/php/php8.3-fpm-reopenlogs;
+    fi
+    if [ -x /usr/lib/php/php8.4-fpm-reopenlogs ]; then
+      /usr/lib/php/php8.4-fpm-reopenlogs;
+    fi
+    if [ -x /usr/lib/php/php8.5-fpm-reopenlogs ]; then
+      /usr/lib/php/php8.5-fpm-reopenlogs;
+    fi
+  endscript
 }
