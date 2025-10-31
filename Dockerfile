@@ -28,7 +28,7 @@ RUN apt-get update -y --allow-insecure-repositories \
     php${PHP_VERSION}-yaml \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /var/log/php/
+RUN mkdir -p /var/log/php/ && chmod -R 0777 /var/log/php/
 
 RUN mkdir -p /usr/etc/php-fpm.d/
 COPY php-fpm.conf /etc/php/${PHP_VERSION}/fpm/php-fpm.conf
