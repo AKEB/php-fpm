@@ -1,4 +1,4 @@
-FROM akeb/docker-debian12:latest AS base
+FROM akeb/docker-debian13:latest AS base
 
 ARG PHP_VERSION="8.3"
 ENV PHP_VERSION=${PHP_VERSION}
@@ -16,8 +16,12 @@ COPY --from=composer_builder /usr/bin/composer /usr/local/bin/composer
 
 COPY php-fpm.conf 00-env.ini root_ca.crt logrotate-php-fpm /tmp/
 
-RUN apt-get update -y --allow-insecure-repositories \
-    && apt-get install -y --no-install-recommends --allow-unauthenticated \
+RUN curl -sSLo /tmp/debsuryorg-archive-keyring.deb https://packages.sury.org/debsuryorg-archive-keyring.deb \
+    && dpkg -i /tmp/debsuryorg-archive-keyring.deb \
+    && rm -f /tmp/debsuryorg-archive-keyring.deb \
+    && echo "deb [signed-by=/usr/share/keyrings/debsuryorg-archive-keyring.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/sury-php.list \
+    && apt-get update -y \
+    && apt-get install -y --no-install-recommends \
         php${PHP_VERSION}-fpm php${PHP_VERSION}-common \
         php${PHP_VERSION}-bcmath php${PHP_VERSION}-curl php${PHP_VERSION}-dom \
         php${PHP_VERSION}-gd php${PHP_VERSION}-igbinary php${PHP_VERSION}-imagick \
