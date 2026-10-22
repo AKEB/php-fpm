@@ -44,5 +44,3 @@ RUN curl -sSLo /tmp/debsuryorg-archive-keyring.deb https://packages.sury.org/deb
     && rm -f /tmp/php-fpm.conf /tmp/00-env.ini /tmp/root_ca.crt /tmp/logrotate-php-fpm
 
 CMD ["/bin/bash", "-c", "cron;/run_on_start.sh;php-fpm${PHP_VERSION} -F"]
-
-EXPOSE 9000
